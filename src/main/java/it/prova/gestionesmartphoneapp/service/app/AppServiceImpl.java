@@ -141,7 +141,8 @@ public class AppServiceImpl implements AppService {
 			for(Smartphone smartphone : smartphoneDAO.list()) {
 				smartphone.getApps().remove(appDAO.get(idApp));
 			}
-	
+			
+			smartphoneDAO.disinstallApp(idApp);
 			appDAO.delete(appDAO.get(idApp));
 			
 			entityManager.getTransaction().commit();

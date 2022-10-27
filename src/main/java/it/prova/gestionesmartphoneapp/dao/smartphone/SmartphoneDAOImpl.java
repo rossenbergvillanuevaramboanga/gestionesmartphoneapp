@@ -68,4 +68,11 @@ public class SmartphoneDAOImpl implements SmartphoneDAO {
 		return query.getResultList().stream().findFirst().orElse(null);
 	}
 
+	@Override
+	public void disinstallApp(Long id) {
+		// TODO Auto-generated method stub
+		entityManager.createNativeQuery("delete from smartphone_app where app_id=?1").setParameter(1, id).executeUpdate();
+		
+	}
+
 }

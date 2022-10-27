@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "app")
+@Table(name = "smartphone")
 public class Smartphone {
 	
 	@Id
@@ -94,6 +94,13 @@ public class Smartphone {
 
 	public void setApps(Set<App> apps) {
 		this.apps = apps;
+	}
+
+	public void removeFromApp(App app) {
+		// TODO Auto-generated method stub
+		this.apps.remove(app);
+		app.getSmartphones().remove(this);
+		
 	}
 	
 	

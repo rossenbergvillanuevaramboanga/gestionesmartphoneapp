@@ -1,19 +1,23 @@
 package it.prova.gestionesmartphoneapp.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+@Entity
+@Table(name = "app")
 public class App {
 	
 	@Id
@@ -23,8 +27,8 @@ public class App {
 	@Column(name = "nome")
 	private String nome;
 	
-	@CreationTimestamp
-	private LocalDateTime dataInstallazione;
+	@Column(name = "datainstallazione")
+	private Date dataInstallazione;
 	
 	@UpdateTimestamp
 	private LocalDateTime dataUltimoAggiornamento;
@@ -61,11 +65,11 @@ public class App {
 		this.nome = nome;
 	}
 
-	public LocalDateTime getDataInstallazione() {
+	public Date getDataInstallazione() {
 		return dataInstallazione;
 	}
 
-	public void setDataInstallazione(LocalDateTime dataInstallazione) {
+	public void setDataInstallazione(Date dataInstallazione) {
 		this.dataInstallazione = dataInstallazione;
 	}
 

@@ -11,7 +11,7 @@ import it.prova.gestionesmartphoneapp.model.App;
 import it.prova.gestionesmartphoneapp.model.Smartphone;
 
 public class SmartphoneServiceImpl implements SmartphoneService {
-	
+
 	private SmartphoneDAO smartphoneDAO;
 	private AppDAO appDAO;
 
@@ -33,14 +33,14 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			smartphoneDAO.setEntityManager(entityManager);
-	
+
 			return smartphoneDAO.list();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
@@ -51,14 +51,14 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			smartphoneDAO.setEntityManager(entityManager);
-	
+
 			return smartphoneDAO.get(id);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
@@ -69,14 +69,14 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			smartphoneDAO.setEntityManager(entityManager);
-	
+
 			return smartphoneDAO.findByIdFetchApps(id);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
@@ -86,21 +86,21 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			
+
 			entityManager.getTransaction().begin();
-			
+
 			smartphoneDAO.setEntityManager(entityManager);
-	
+
 			smartphoneDAO.update(smartphone);
-			
+
 			entityManager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
@@ -110,21 +110,21 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			
+
 			entityManager.getTransaction().begin();
-			
+
 			smartphoneDAO.setEntityManager(entityManager);
-	
+
 			smartphoneDAO.insert(smartphone);
-			
+
 			entityManager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
@@ -134,23 +134,23 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			
+
 			entityManager.getTransaction().begin();
-			
+
 			smartphoneDAO.setEntityManager(entityManager);
-	
-			smartphoneDAO.update(smartphoneDAO.get(idSmartphone));
-			
+
+			smartphoneDAO.delete(smartphoneDAO.get(idSmartphone));
+
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
-		
+
 	}
 
 	@Override
@@ -158,25 +158,25 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			
+
 			entityManager.getTransaction().begin();
-			
+
 			smartphoneDAO.setEntityManager(entityManager);
-	
+
 			smartphone = entityManager.merge(smartphone);
 			app = entityManager.merge(app);
-			
-			smartphone.getApps().add(app);
+
 			app.getSmartphones().add(smartphone);
-			
+			smartphone.getApps().add(app);
+
 			entityManager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
@@ -186,28 +186,30 @@ public class SmartphoneServiceImpl implements SmartphoneService {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			
+
 			entityManager.getTransaction().begin();
-			
+
 			smartphoneDAO.setEntityManager(entityManager);
-	
+
 			smartphone = entityManager.merge(smartphone);
 			app = entityManager.merge(app);
-			
-			smartphone.getApps().remove(app);
-			app.getSmartphones().remove(smartphone);
-			
+
+//			smartphone.getApps().remove(app);
+//			app.getSmartphones().remove(smartphone);
+
+			smartphoneDAO.disinstallApp(app.getId());
+
 			entityManager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
-		}finally {
+		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
-		
+
 	}
 
 }

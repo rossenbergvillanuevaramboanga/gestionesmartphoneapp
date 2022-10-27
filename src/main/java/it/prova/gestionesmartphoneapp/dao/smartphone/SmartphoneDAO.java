@@ -7,4 +7,6 @@ public interface SmartphoneDAO extends IBaseDAO<Smartphone>{
 
 	Smartphone findByIdFetchApps(Long id);
 
+	void disinstallApp(Long id);
+
 }
